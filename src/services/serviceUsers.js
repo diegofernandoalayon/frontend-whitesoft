@@ -5,8 +5,10 @@ const post = (data) =>{
   console.log(data)
   return fetch(baseUrl,{
     method:'POST',
+    mode: 'cors',
     headers: {
       "Content-Type": "application/json",
+      
     },
     body:JSON.stringify(data)
   })
