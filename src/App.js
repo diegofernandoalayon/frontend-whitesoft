@@ -2,8 +2,8 @@
 import { useEffect, useState } from 'react';
 import ListaPaises from './components/ListaPaises';
 import './App.css';
-import get from './services/getPaises'
-
+import servicePaises from './services/getPaises'
+import serviceUsers from './services/serviceUsers';
 
 function App() {
   
@@ -11,15 +11,28 @@ function App() {
   const [selectedPais, setSelectedPais] = useState('')
   const [name, setName] = useState('')
   useEffect(()=>{
-    get.paises().then((data)=>{
+    servicePaises.get().then((data)=>{
       setPaises(data)
     })
   },[])
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    console.log('Submit')
-    console.log(selectedPais, name)
+    if(selectedPais!=='' && name !== ''){
+
+      console.log('Submit')
+      console.log(selectedPais, name)
+      serviceUsers.post({
+        nombre:name,
+        pais:selectedPais
+      })
+        .then((data)=>{
+          console.log(data)
+          setName('')
+          // setSelectedPais('')
+
+        })
+    }
     
   }
   const handleChangePais = (event) => {
@@ -33,9 +46,10 @@ function App() {
   return (
     <div className="App">
       <form onSubmit={handleSubmit}>
-      <input onChange={handleChangeName} required/>
+      <input onChange={handleChangeName} value={name} required/>
       <select onChange={handleChangePais}>
-        <option value = ''>Seleccione pais</option>
+        <option disabled>Pais</option>
+        <option></option>
         {paises.map((pais) => (
           <ListaPaises key={pais.name.common} text={pais.name.common} value={pais.name.common}/>
         ))}
