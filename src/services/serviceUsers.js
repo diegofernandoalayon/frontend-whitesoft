@@ -1,11 +1,9 @@
-// const post = async () => {
-//   const response = await fetch('http://localhost:2000/api/users',{
+const baseUrl = 'https://secure-temple-74134.herokuapp.com/api/users'
+// const baseUrl = 'http://localhost:2000/api/users'
 
-//   })
-// }
 const post = (data) =>{
   console.log(data)
-  return fetch('http://localhost:2000/api/users',{
+  return fetch(baseUrl,{
     method:'POST',
     headers: {
       "Content-Type": "application/json",
