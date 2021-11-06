@@ -45,16 +45,22 @@ function App() {
   }
   return (
     <div className="App">
-      <form onSubmit={handleSubmit}>
-      <input onChange={handleChangeName} value={name} required/>
+      <h1>Formulario</h1>
+      <form onSubmit={handleSubmit} className="form">
+      <input 
+      onChange={handleChangeName} 
+      value={name} 
+      placeholder="ingrese su nombre completo"
+      required
+      />
       <select onChange={handleChangePais}>
         <option disabled>Pais</option>
-        <option></option>
+        <option>Selecione un pais</option>
         {paises.map((pais) => (
           <ListaPaises key={pais.name.common} text={pais.name.common} value={pais.name.common}/>
         ))}
       </select>
-      <button>Hola</button>
+      <button>Enviar</button>
       </form>
     </div>
   );
